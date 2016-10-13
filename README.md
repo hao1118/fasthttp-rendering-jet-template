@@ -185,14 +185,14 @@ func Gunzip(data []byte) ([]byte, error) {
 		return nil, err
 	}
 	defer r.Close()
-	ud, _ := ioutil.ReadAll(r)
-  if err != nil {
+	ud, err := ioutil.ReadAll(r)
+	if err != nil {
 		return nil, err
 	}
 	return ud, nil
 }
 
-import "github.com/OneOfOne/xxhash"   //xxhash is the fastest hash
+import "github.com/OneOfOne/xxhash"   //xxhash is so-called the fastest hash
 
 func Hash(data []byte) uint64 {
 	return xxhash.Checksum64(data)
