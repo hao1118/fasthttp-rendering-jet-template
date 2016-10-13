@@ -8,6 +8,7 @@ import(
         "github.com/tdewolff/minify"
         ......
 )
+
 var myCache = cache.New(30 * time.Minute, time.Minute)
 var myCompress = NewCompress()
 var myConfig Config
@@ -24,12 +25,12 @@ func home(ctx *fasthttp.RequestCtx) {
 		Locale:   locale,
 		Title:    LS(locale, "Home"),  //LS: func to get translated string
 	}
-  ......
+	......
 	m := jet.VarMap{}
 	m.Set("LS", LS)	  //use LS in jet template
 	m.Set("news", GetPostList(co, "news", 10))
 	m.Set("products", GetPostList(co, "products", 10))
-  ......
+	......
 	Render(ctx, "public/home", ck, m, p)
 }
 
@@ -94,9 +95,9 @@ func RenderError(ctx *fasthttp.RequestCtx, msg string) {
 }
 
 type Cache struct {
-	Etag string
 	Type string
 	Body []byte
+	Etag string
 	Gzip bool
 }
 
@@ -142,6 +143,7 @@ func RenderCache(ctx *fasthttp.RequestCtx, ck string) bool {
 }
 
 //some funcs used in Render func
+
 type Compress struct {
 	minifier *minify.M
 }
